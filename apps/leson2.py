@@ -89,3 +89,51 @@ print find_second(danton, 'audace')
 twister = "she sells seashells by the seashore"
 print find_second(twister,'she')
 #>>> 13
+
+
+#----------------------------5-------------------------
+# Define a procedure, bigger, that takes in
+# two numbers as inputs, and returns the
+# greater of the two inputs.
+
+def bigger(a, b):
+    if a < b :
+        a = b
+    return a
+
+
+
+
+
+print bigger(2,7)
+#>>> 7
+
+print bigger(3,2)
+#>>> 3
+
+print bigger(3,3)
+#>>> 3
+
+#--------------------------------------6-7--------------------
+# Define a procedure, is_friend, that takes
+# a string as its input, and returns a
+# Boolean indicating if the input string
+# is the name of a friend. Assume
+# I am friends with everyone whose name
+# starts with either 'D' or 'N', but no one
+# else. You do not need to check for
+# lower case 'd' or 'n'
+
+def is_friend(name):
+    return name.find('D') * name.find('N') == 0
+
+
+
+print is_friend('Diane')
+#>>> True
+
+print is_friend('Ned')
+#>>> True
+
+print is_friend('Moe')
+#>>> False
