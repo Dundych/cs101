@@ -171,3 +171,27 @@ print biggest(3, 3, 9)
 
 print biggest(9, 3, 9)
 #>>> 9
+
+#----------------------9---------------------
+# Define a procedure, print_numbers, that takes
+# as input a positive whole number, and prints 
+# out all the whole numbers from 1 to the input
+# number.
+
+# Make sure your procedure prints "upwards", so
+# from 1 up to the input number.
+
+def print_numbers(num) :
+    i = 1
+    while i < num + 1 :
+        print i
+        i = i + 1
+                  
+   
+
+
+
+print_numbers(9)
+#>>> 1
+#>>> 2
+#>>> 3
