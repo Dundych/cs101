@@ -137,3 +137,37 @@ print is_friend('Ned')
 
 print is_friend('Moe')
 #>>> False
+
+#-----------------8---------------------------------
+
+# Define a procedure, biggest, that takes three
+# numbers as inputs and returns the largest of
+# those three numbers.
+
+def biggest(a, b, c):
+    result = a
+    if  result < b:
+        result = b
+    if  result < c:
+        result = c
+    return result
+        
+
+
+
+
+
+print biggest(3, 6, 9)
+#>>> 9
+
+print biggest(6, 9, 3)
+#>>> 9
+
+print biggest(9, 3, 6)
+#>>> 9
+
+print biggest(3, 3, 9)
+#>>> 9
+
+print biggest(9, 3, 9)
+#>>> 9
