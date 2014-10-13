@@ -49,3 +49,7 @@ url =  page[first_quote + 1:second_quote]
 
 print url
 
+
+# Write Python code that prints out the number of hours in 7 weeks.
+print 7 * 7 * 24
+
