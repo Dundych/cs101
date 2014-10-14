@@ -599,6 +599,155 @@ test()
 print daysBetweenDates(2011,6,30,2012,6,30)
 print daysBetweenDates(2012,1,1,2012,2,28)
 
+#--------------------------------10------------------
+#########################################################################
+#                 10-row School abacus
+#                         by
+#                      Michael H
+#########################################################################
+#       Description partially extracted from from wikipedia 
+#
+#  Around the world, abaci have been used in pre-schools and elementary
+#
+# In Western countries, a bead frame similar to the Russian abacus but
+# with straight wires and a vertical frame has been common (see image).
+# Helps schools as an aid in teaching the numeral system and arithmetic
+#
+#         |00000*****   |     row factor 1000000000
+#         |00000*****   |     row factor 100000000
+#         |00000*****   |     row factor 10000000 
+#         |00000*****   |     row factor 1000000
+#         |00000*****   |     row factor 100000
+#         |00000*****   |     row factor 10000
+#         |00000*****   |     row factor 1000
+#         |00000****   *|     row factor 100     * 1
+#         |00000***   **|     row factor 10      * 2
+#         |00000**   ***|     row factor 1       * 3
+#                                        -----------    
+#                             Sum                123 
+#
+# Each row represents a different row factor, starting with x1 at the
+# bottom, ascending up to x1000000000 at the top row.     
+######################################################################
+
+# TASK:
+# Define a procedure print_abacus(integer) that takes a positive integer
+# and prints a visual representation (image) of an abacus setup for a 
+# given positive integer value.
+# 
+# Ranking
+# 1 STAR: solved the problem!
+# 2 STARS: 6 < lines <= 9
+# 3 STARS: 3 < lines <= 6
+# 4 STARS: 0 < lines <= 3
+def getArr(num):
+    l9 = l8 = l7 = l6 = l5 = l4 = l3 = l2 = l1 = l0 = 0
+    while True:
+        if (num - 1000000000) >= 0:
+            num = num - 1000000000
+            l9 = l9 + 1
+        else:
+            if (num - 100000000) >= 0:
+                num = num - 100000000
+                l8 = l8 + 1
+            else:
+                if (num - 10000000) >= 0:
+                    num = num - 10000000
+                    l7 = l7 + 1
+                else:
+                    if (num - 1000000) >= 0:
+                        num = num - 1000000
+                        l6 = l6 + 1
+                    else:
+                        if (num - 100000) >= 0:
+                            num = num - 100000
+                            l5 = l5 + 1
+                        else:
+                            if (num - 10000) >= 0:
+                                num = num - 10000
+                                l4 = l4 + 1
+                            else:
+                                if (num - 1000) >= 0:
+                                    num = num - 1000
+                                    l3 = l3 + 1
+                                else:
+                                    if (num - 100) >= 0:
+                                        num = num - 100
+                                        l2 = l2 + 1
+                                    else:
+                                        if (num - 10) >= 0:
+                                            num = num - 10
+                                            l1 = l1 + 1
+                                        else:
+                                            if num >0:
+                                                l0 = num
+                                            break
+    return l9, l8, l7, l6, l5, l4, l3, l2, l1, l0
+
+def getLine(num):
+    line = "00000*****"
+    line = "|" + line[: len(line)-num] + "   "  + line[len(line) - num: ] + "|"
+    return line
+
+
+def print_abacus(value):
+       #
+       ### Add you code here 
+       #
+       l9, l8, l7, l6, l5, l4, l3, l2, l1, l0 = getArr(value)
+        
+       print getLine(l9)
+       print getLine(l8)
+       print getLine(l7)
+       print getLine(l6)
+       print getLine(l5)
+       print getLine(l4)
+       print getLine(l3)
+       print getLine(l2)
+       print getLine(l1)
+       print getLine(l0)
+       
+       
+
+
+###  TEST CASES
+print "Abacus showing 0:"
+print_abacus(0)
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+print "Abacus showing 12345678:"
+print_abacus(12345678)
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000****   *|
+#>>>|00000***   **|
+#>>>|00000**   ***|
+#>>>|00000*   ****|
+#>>>|00000   *****|
+#>>>|0000   0*****|
+#>>>|000   00*****|
+#>>>|00   000*****|
+print "Abacus showing 1337:"
+print_abacus(1337)
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000*****   |
+#>>>|00000****   *|
+#>>>|00000**   ***|
+#>>>|00000**   ***|
+#>>>|000   00*****|
+
 
 
 
