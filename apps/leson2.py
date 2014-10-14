@@ -748,6 +748,101 @@ print_abacus(1337)
 #>>>|00000**   ***|
 #>>>|000   00*****|
 
+#---------------------------------11------------------
+
+# By AnnaGajdova from forums
+# You are in the middle of a jungle. 
+# Suddenly you see an animal coming to you. 
+# Here is what you should do if the animal is:
+
+# zebra >> "Try to ride a zebra!"
+# cheetah >> If you are faster than a cheetah: "Run!" 
+#            If you are not: "Stay calm and wait!". 
+#            The speed of a cheetah is 115 km/h.
+# anything else >> "Introduce yourself!"
+
+# Define a procedure, jungle_animal, 
+# that takes as input a string and a number, 
+# an animal and your speed (in km/h), 
+# and prints out what to do.
+
+def jungle_animal(animal, my_speed):
+    # YOUR CODE HERE
+    if animal == "zebra":
+        print "Try to ride a zebra!"
+        return
+    if animal == 'cheetah':
+        if my_speed > 115:
+            print "Run!"
+            return
+        else:
+            print "Stay calm and wait!"
+            return
+    print "Introduce yourself!"
+    return   
+
+
+jungle_animal('cheetah', 30)
+#>>> "Stay calm and wait!"
+
+#jungle_animal('gorilla', 21)
+#>>> "Introduce yourself!"
+
+#--------------------------------12-------------------
+# By Ashwath from forums
+
+# A leap year baby is a baby born on Feb 29, which occurs only on a leap year.
+
+# Define a procedure is_leap_baby that takes 3 inputs: day, month and year
+# and returns True if the date is a leap day (Feb 29 in a valid leap year)
+# and False otherwise.
+
+# A year that is a multiple of 4 is a leap year unless the year is
+# divisible by 100 but not a multiple of 400 (so, 1900 is not a leap
+# year but 2000 and 2004 are).
+def isLeapYear(year):
+    if (year % 4) != 0:
+        return 0
+    if (year % 100) != 0: 
+        return 1
+    if (year % 400) != 0:
+        return 0
+    return 1
+
+def is_leap_baby(day,month,year):
+    # Write your code after this line.
+    if isLeapYear(year):
+       if month == 2:
+            if day == 29:
+                return True
+    
+    return False
+
+# The function 'output' prints one of two statements based on whether 
+# the is_leap_baby function returned True or False.
+
+def output(status,name):
+    if status:
+        print "%s is one of an extremely rare species. He is a leap year baby!" % name
+    else:
+        print "There's nothing special about %s's birthday. He is not a leap year baby!" % name
+
+# Test Cases
+
+output(is_leap_baby(29, 2, 1996), 'Calvin')
+#>>>Calvin is one of an extremely rare species. He is a leap year baby!
+
+output(is_leap_baby(19, 6, 1978), 'Garfield')
+#>>>There's nothing special about Garfield's birthday. He is not a leap year baby!
+
+output(is_leap_baby(29, 2, 2000), 'Hobbes')
+#>>>Hobbes is one of an extremely rare species. He is a leap year baby!
+
+output(is_leap_baby(29, 2, 1900), 'Charlie Brown')
+#>>>There's nothing special about Charlie Brown's birthday. He is not a leap year baby!
+
+output(is_leap_baby(28, 2, 1976), 'Odie')
+#>>>There's nothing special about Odie's birthday. He is not a leap year baby!
 
 
 
