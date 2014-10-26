@@ -546,6 +546,71 @@ print second_input
 print third_input
 #>>> [7,8,9]
 
+#---------------------8---------------
+# A list is symmetric if the first row is the same as the first column,
+# the second row is the same as the second column and so on. Write a
+# procedure, symmetric, which takes a list as input, and returns the
+# boolean True if the list is symmetric and False if it is not.
+def is_equal_lists(a, b):
+    n = len(a)
+    while n:
+        if a[-n] != b[-n]:
+            return False
+        n -= 1
+    return True
+
+def sort_by_columns(list_of_lists):
+    res = []
+    n = len(list_of_lists)
+    while n:
+        row = []
+        for OneList in list_of_lists:
+            row.append(OneList[-n])
+        res.append(row)
+        n -= 1
+    return res
+
+def symmetric(p):
+    for el in p:
+        if len(el) != len(p):
+            return False
+    q = sort_by_columns(p)
+    n = len(p) 
+    while n:
+        if not is_equal_lists(p[-n], q[-n]):
+            return False
+        n -= 1
+    return True
+    
+
+print symmetric([[1, 2, 3],
+                [2, 3, 4],
+                [3, 4, 1]])
+#>>> True
+
+print symmetric([["cat", "dog", "fish"],
+                ["dog", "dog", "fish"],
+                ["fish", "fish", "cat"]])
+#>>> True
+
+print symmetric([["cat", "dog", "fish"],
+                ["dog", "dog", "dog"],
+                ["fish","fish","cat"]])
+#>>> False
+
+print symmetric([[1, 2],
+                [2, 1]])
+#>>> True
+
+print symmetric([[1, 2, 3, 4],
+                [2, 3, 4, 5],
+                [3, 4, 5, 6]])
+#>>> False
+
+print symmetric([[1,2,3],
+                 [2,3,1]])
+#>>> False
+
 
 
 
