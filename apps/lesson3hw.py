@@ -641,6 +641,66 @@ print list_mean([])
 print list_mean([2])
 #>>> 2.0
 
+#-----10-----
+# By Dimitris_GR from forums
+# Modify Problem Set 31's (Optional) Symmetric Square to return True 
+# if the given square is antisymmetric and False otherwise. 
+# An nxn square is called antisymmetric if A[i][j]=-A[j][i] 
+# for each i=0,1,...,n-1 and for each j=0,1,...,n-1.
+def is_antiequal_lists(a, b):
+    n = len(a)
+    while n:
+        if a[-n] != -b[-n]:
+            return False
+        n -= 1
+    return True
+
+def sort_by_columns(list_of_lists):
+    res = []
+    n = len(list_of_lists)
+    while n:
+        row = []
+        for OneList in list_of_lists:
+            row.append(OneList[-n])
+        res.append(row)
+        n -= 1
+    return res
+
+def antisymmetric(p):
+    for el in p:
+        if len(el) != len(p):
+            return False
+    q = sort_by_columns(p)
+    n = len(p) 
+    while n:
+        if not is_antiequal_lists(p[-n], q[-n]):
+            return False
+        n -= 1
+    return True
+
+# Test Cases:
+
+print antisymmetric([[0, 1, 2], 
+                     [-1, 0, 3], 
+                     [-2, -3, 0]])   
+#>>> True
+
+print antisymmetric([[0, 0, 0],
+                     [0, 0, 0],
+                     [0, 0, 0]])
+#>>> True
+
+print antisymmetric([[0, 1, 2], 
+                     [-1, 0, -2], 
+                     [2, 2,  3]])
+#>>> False
+
+print antisymmetric([[1, 2, 5],
+                     [0, 1, -9],
+                     [0, 0, 1]])
+#>>> False
+
+
 
 
 
