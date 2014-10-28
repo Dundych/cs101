@@ -825,6 +825,55 @@ print repr(string), numbers_in_lists(string) == result
 string = '123456789'
 result = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 print repr(string), numbers_in_lists(string) == result
+
+#-------------13-----------
+# Crypto Analysis: Frequency Analysis
+#
+# To analyze encrypted messages, to find out information about the possible 
+# algorithm or even language of the clear text message, one could perform 
+# frequency analysis. This process could be described as simply counting 
+# the number of times a certain symbol occurs in the given text. 
+# For example:
+# For the text "test" the frequency of 'e' is 1, 's' is 1 and 't' is 2.
+#
+# The input to the function will be an encrypted body of text that only contains 
+# the lowercase letters a-z. 
+# As output you should return a list of the normalized frequency 
+# for each of the letters a-z. 
+# The normalized frequency is simply the number of occurrences, i, 
+# divided by the total number of characters in the message, n.
+
+def freq_analysis(message):
+	freq_arr = [0.0] * 26
+	a_code = ord('a')
+	letters = []
+	for i in xrange(26):
+		letters.append(chr(a_code + i))
+	for c in message:
+		index = ord(c) - a_code	
+		freq_arr[index] += 1
+	for i in xrange(26):
+		freq_arr[i] = freq_arr[i] / len(message)
+	return freq_arr
+	
+
+
+#Tests
+
+if __name__ == '__main__':
+	assert freq_analysis("abcd") == [0.25, 0.25, 0.25, 0.25,] + [0.0] * 22
+	assert freq_analysis("adca") == [0.5, 0.0, 0.25, 0.25] + [0.0] *  22
+#Tests
+
+print freq_analysis("abcd")
+#>>> [0.25, 0.25, 0.25, 0.25, 0.0, ..., 0.0]
+
+print freq_analysis("adca")
+#>>> [0.5, 0.0, 0.25, 0.25, 0.0, ..., 0.0]
+
+print freq_analysis('bewarethebunnies')
+#>>> [0.0625, 0.125, 0.0, 0.0, ..., 0.0]
+
          
 
            
