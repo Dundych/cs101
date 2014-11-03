@@ -13,22 +13,29 @@
 # the source string up by the characters in the
 # splitlist.
 
+def get_next_part(string, splitlist):
+    pos = len(string)
+    part = string
+    for split in splitlist:
+        posSplit = string.find(split)
+        partSplit = string[:posSplit]
+        if (posSplit != -1) and (partSplit < part):
+            pos = posSplit
+            part = partSplit
+    return part, pos
+
 
 def split_string(source,splitlist):
     res = []
     i = 0
     while i < len(source):
-        posEndMinPart = len(source)
-        for el in splitlist:
-            pos = source.find(el)
-            if (pos != -1) and (pos < posEndMinPart):
-                posEndMinPart = pos
-        i = posEndMinPart
-        res.append(source[0:posEndMinPart])
+        part, pos = get_next_part(source[i:], splitlist)
+        res.append(part)
+        i = pos+1   
+    return res
 
 
-
-
+    
 
 out = split_string("This is a test-of the,string separation-code!"," ,!-")
 print out
