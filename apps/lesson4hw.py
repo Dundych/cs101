@@ -1,3 +1,4 @@
+#-------1-------
 # 1 Gold Star
 
 # The built-in <string>.split() procedure works
@@ -30,8 +31,9 @@ def split_string(source,splitlist):
     i = 0
     while i < len(source):
         part, pos = get_next_part(source[i:], splitlist)
-        res.append(part)
-        i = pos+1   
+        if splitlist.find(part) == -1:
+            res.append(part)
+        i = i+ pos + 1   
     return res
 
 
@@ -41,10 +43,10 @@ out = split_string("This is a test-of the,string separation-code!"," ,!-")
 print out
 #>>> ['This', 'is', 'a', 'test', 'of', 'the', 'string', 'separation', 'code']
 
-#out = split_string("After  the flood   ...  all the colors came out.", " .")
-#print out
+out = split_string("After  the flood   ...  all the colors came out.", " .")
+print out
 #>>> ['After', 'the', 'flood', 'all', 'the', 'colors', 'came', 'out']
 
-#out = split_string("First Name,Last Name,Street Address,City,State,Zip Code",",")
-#print out
+out = split_string("First Name,Last Name,Street Address,City,State,Zip Code",",")
+print out
 #>>>['First Name', 'Last Name', 'Street Address', 'City', 'State', 'Zip Code']
