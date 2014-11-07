@@ -343,6 +343,150 @@ passage =("The number of orderings of the 52 cards in a deck of cards "
 "possible way.")
 print count_words(passage)
 #>>>56
+#-----5-----
+# Write a procedure, speed_fraction, which takes as its inputs the result of
+# a traceroute (in ms) and distance (in km) between two points. It should 
+# return the speed the data travels as a decimal fraction of the speed of
+# light.
+
+speed_of_light = 300000. # km per second
+
+def speed_fraction(time, distance):
+    speed = distance/(time/(2.0 * 1000))
+    return speed / speed_of_light
+
+print speed_fraction(50,5000)
+#>>> 0.666666666667
+
+print speed_fraction(50,10000)
+#>>> 1.33333333333  # Any thoughts about this answer, or these inputs?
+#-----6-----
+# Write a procedure, convert_seconds, which takes as input a non-negative 
+# number of seconds and returns a string of the form 
+# '<integer> hours, <integer> minutes, <number> seconds' but
+# where if <integer> is 1 for the number of hours or minutes, 
+# then it should be hour/minute. Further, <number> may be an integer
+# or decimal, and if it is 1, then it should be followed by second.
+# You might need to use int() to turn a decimal into a float depending
+# on how you code this. int(3.0) gives 3
+#
+# Note that English uses the plural when talking about 0 items, so
+# it should be "0 minutes".
+#
+
+def convert_seconds(inp):
+    #inp = int(inp*1.)
+    hours =int(inp / 3600)
+    inp -= hours * 3600
+    minutes = int(inp / 60)
+    inp -=  minutes * 60
+    seconds = inp
+    string = ''
+    string += str(hours) + " hours, " + str(minutes) + " minutes, " + str(seconds) + " seconds"
+    if hours == 1:
+       string = string[: string.find('hours') + 4 ] + string[string.find('hours') + 5: ]
+    if minutes == 1:
+       string = string[: string.find('minutes') + 6 ] + string[string.find('minutes') + 7: ]
+    if seconds == 1 or seconds == 1.0:
+       string = string[: string.find('seconds') + 6 ] + string[string.find('seconds') + 7: ]
+    return string
+    
+
+print convert_seconds(3661)
+#>>> 1 hour, 1 minute, 1 second
+
+print convert_seconds(7325)
+#>>> 2 hours, 2 minutes, 5 seconds
+
+print convert_seconds(7261.7)
+#>>> 2 hours, 1 minute, 1.7 seconds
+#-----7-----
+# Write a procedure download_time which takes as inputs a file size, the
+# units that file size is given in, bandwidth and the units for
+# bandwidth (excluding per second) and returns the time taken to download 
+# the file.
+# Your answer should be a string in the form
+# "<number> hours, <number> minutes, <number> seconds"
+
+# Some information you might find useful is the number of bits
+# in kilobits (kb), kilobytes (kB), megabits (Mb), megabytes (MB),
+# gigabits (Gb), gigabytes (GB) and terabits (Tb), terabytes (TB).
+
+#print 2 ** 10      # one kilobit, kb
+#print 2 ** 10 * 8  # one kilobyte, kB
+
+#print 2 ** 20      # one megabit, Mb
+#print 2 ** 20 * 8  # one megabyte, MB
+
+#print 2 ** 30      # one gigabit, Gb
+#print 2 ** 30 * 8  # one gigabyte, GB
+
+#print 2 ** 40      # one terabit, Tb
+#print 2 ** 40 * 8  # one terabyte, TB
+
+# Often bandwidth is given in megabits (Mb) per second whereas file size 
+# is given in megabytes (MB).
+def convert_seconds(inp):
+    hours =int(inp / 3600)
+    inp -= hours * 3600
+    minutes = int(inp / 60)
+    inp -=  minutes * 60
+    seconds = inp
+    string = ''
+    string += str(hours) + " hours, " + str(minutes) + " minutes, " + str(seconds) + " seconds"
+    if hours == 1:
+       string = string[: string.find('hours') + 4 ] + string[string.find('hours') + 5: ]
+    if minutes == 1:
+       string = string[: string.find('minutes') + 6 ] + string[string.find('minutes') + 7: ]
+    if seconds == 1 or seconds == 1.0:
+       string = string[: string.find('seconds') + 6 ] + string[string.find('seconds') + 7: ]
+    return string
+
+def convert_to_bits(meas):
+    if meas == 'kb':
+        return 2 ** 10  # one kilobit, kb
+    if meas == 'kB':
+        return 2 ** 10 * 8  # one kilobyte, kB
+    if meas == 'Mb':
+        return 2 ** 20      # one megabit, Mb
+    if meas == 'MB':
+        return 2 ** 20 * 8  # one megabyte, MB
+    if meas == 'Gb':
+        return 2 ** 30      # one gigabit, Gb
+    if meas == 'GB':
+        return 2 ** 30 * 8  # one gigabyte, GB
+    if meas == 'Tb':
+        return 2 ** 40      # one terabit, Tb
+    if meas == 'TB':
+        return 2 ** 40 * 8  # one terabyte, TB
+
+def download_time(size, size_meas, bandw, bandw_meas):
+    sizeInB = size * convert_to_bits(size_meas) * 1.
+    bandwInB = bandw * convert_to_bits(bandw_meas)
+    
+    return convert_seconds(sizeInB / bandwInB)
+    
+
+print download_time(1024,'kB', 1, 'MB')
+#>>> 0 hours, 0 minutes, 1 second
+
+print download_time(1024,'kB', 1, 'Mb')
+#>>> 0 hours, 0 minutes, 8 seconds  # 8.0 seconds is also acceptable
+
+print download_time(13,'GB', 5.6, 'MB')
+#>>> 0 hours, 39 minutes, 37.1428571429 seconds
+
+print download_time(13,'GB', 5.6, 'Mb')
+#>>> 5 hours, 16 minutes, 57.1428571429 seconds
+
+print download_time(10,'MB', 2, 'kB')
+#>>> 1 hour, 25 minutes, 20 seconds  # 20.0 seconds is also acceptable
+
+print download_time(10,'MB', 2, 'kb')
+#>>> 11 hours, 22 minutes, 40 seconds  # 40.0 seconds is also acceptable
+
+print download_time(11,'GB', 5, 'MB')
+
 
 
 
