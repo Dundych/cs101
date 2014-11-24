@@ -523,9 +523,7 @@ print triangle(6)
 #>>> [[1], [1, 1], [1, 2, 1], [1, 3, 3, 1], [1, 4, 6, 4, 1], [1, 5, 10, 10, 5, 1]]
 
 
-#---7---(not fin)
-
-
+#---7---
 # Triple Gold Star
 
 # Only A Little Lucky
@@ -577,35 +575,40 @@ def ordered_search(index, ranks, keyword):
     if simpleSearch:
         for el in simpleSearch:
             if (el in ranks):
-               res_ranks[el]= ranks[el]
-    ol = get_sort_list(res_ranks)
+               res_ranks[el] = ranks[el]
+    ol = get_sort_list_from_dict(res_ranks)
     return ol
 
 
-def get_sort_list(dict_with_ranks):
-    
-    ol = dict_with_ranks
+def get_sort_list_from_dict(dict_with_ranks):
+    rank_list= []
+    ol = []
+    for key in dict_with_ranks:
+        rank_list.append(dict_with_ranks[key])
+    sorted_list = my_qsort(rank_list)
+    for el in sorted_list:
+        for key in dict_with_ranks:
+            if el == dict_with_ranks[key]:
+                ol.append(key)
     return ol
 
 
 def my_qsort(ul):
-        if len(ul) < 2:
+        if len(ul) == 0:
             return ul
-        
+        if len(ul) == 1:
+            return ul
         pivot = ul[0]
+        ul = ul[1:]
         leftPrt = []
         rightPrt = []
-        for i in xrange(len(ul)):
-            if ul[i]>pivot:
-               leftPrt.append(ul[i])
+        for el in ul:
+            if el > pivot:
+               leftPrt.append(el)
             else:
-               rightPrt.append(ul[i])
-        
-        ol = my_qsort(leftPrt) + my_qsort(rightPrt)
-        return ol
-
-    
-print  my_qsort([1,2,3,4,5,6,7,6,5,4,3,2,1,0])    
+               rightPrt.append(el)
+        ol = my_qsort(leftPrt) + [pivot] + my_qsort(rightPrt)
+        return ol   
         
 
 cache = {
@@ -823,22 +826,23 @@ def compute_ranks(graph):
 index, graph = crawl_web('http://udacity.com/cs101x/urank/index.html')
 ranks = compute_ranks(graph)
 
-#print ordered_search(index, ranks, 'Hummus')
+print ordered_search(index, ranks, 'Hummus')
 #>>> ['http://udacity.com/cs101x/urank/kathleen.html',
 #    'http://udacity.com/cs101x/urank/nickel.html',
 #    'http://udacity.com/cs101x/urank/arsenic.html',
 #    'http://udacity.com/cs101x/urank/hummus.html',
 #    'http://udacity.com/cs101x/urank/index.html']
 
-#print ordered_search(index, ranks, 'the')
+print ordered_search(index, ranks, 'the')
 #>>> ['http://udacity.com/cs101x/urank/nickel.html',
 #    'http://udacity.com/cs101x/urank/arsenic.html',
 #    'http://udacity.com/cs101x/urank/hummus.html',
 #    'http://udacity.com/cs101x/urank/index.html']
 
 
-#print ordered_search(index, ranks, 'babaganoush')
+print ordered_search(index, ranks, 'babaganoush')
 #>>> None
+
 
 
 
